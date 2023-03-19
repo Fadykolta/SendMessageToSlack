@@ -1,10 +1,8 @@
 name: Notify Slack
-
-on:
+'on':
   push:
     branches:
       - main
-
 jobs:
   slackNotification:
     name: Slack Notification
@@ -15,4 +13,10 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: '${{ secrets.SLACK_WEBHOOK }}'
-
+      - name: Slack Notification
+        uses: act10ns/slack@v1
+        with: null
+        status: '${{ job.status }}'
+        channel: '#github-action'
+        message: 'Deployed {{ env.GITHUB_REF_NAME }} branch Successfully'
+        if: always()
