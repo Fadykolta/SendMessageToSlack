@@ -1,0 +1,28 @@
+name: Notify Slack on Pull Request Open and Push to Main
+
+on:
+  pull_request:
+    types: [opened]
+  push:
+    branches:
+      - main
+
+jobs:
+  notify-slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Send message to Slack
+        uses: actions/http-request@v2
+        with:
+          url: https://slack.com/api/chat.postMessage
+          method: POST
+          headers:
+            Authorization: "Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
+            Content-type: application/json
+          data: '{"channel": "#gethub-action", "text": "New pull request or push to main branch!"}'
