@@ -1,8 +1,6 @@
-name: Notify Slack on Pull Request Open and Push to Main
+name: Notify Slack
 
 on:
-  pull_request:
-    types: [opened]
   push:
     branches:
       - main
@@ -11,18 +9,11 @@ jobs:
   notify-slack:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Send message to Slack
-        uses: actions/http-request@v2
+        uses: rtCamp/action-slack-notify@v2.2.0
         with:
-          url: https://slack.com/api/chat.postMessage
-          method: POST
-          headers:
-            Authorization: "Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
-            Content-type: application/json
-          data: '{"channel": "#general", "text": "New pull request or push to main branch!"}'
+          status: ${{ job.status }}
+          text: "Build ${{ job.status }} for commit ${{ github.sha }} on branch ${{ github.ref }} by ${{ github.actor }}"
+          fields: repo,message,author,action,workflow,job,commit,ref,eventName,refType,runNumber,runId
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
