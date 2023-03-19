@@ -1,8 +1,11 @@
-name: Notify Slack on Pull Request Open
+name: Notify Slack on Pull Request Open and Push to Main
 
 on:
   pull_request:
     types: [opened]
+  push:
+    branches:
+      - main
 
 jobs:
   notify-slack:
@@ -22,4 +25,4 @@ jobs:
           headers:
             Authorization: "Bearer ${{ secrets.SLACK_BOT_TOKEN }}"
             Content-type: application/json
-          data: '{"channel": "#gethub-action", "text": "New pull request opened!"}'
+          data: '{"channel": "#general", "text": "New pull request or push to main branch!"}'
