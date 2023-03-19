@@ -2,14 +2,6 @@
 
 # Slack Notify - GitHub Action
 
-A [GitHub Action](https://github.com/features/actions) to send a message to a Slack channel.
-
-**Screenshot**
-
-<img width="485" alt="action-slack-notify-rtcamp" src="https://user-images.githubusercontent.com/4115/54996943-9d38c700-4ff0-11e9-9d35-7e2c16ef0d62.png">
-
-The `Site` and `SSH Host` details are only available if this action is run after [Deploy WordPress GitHub action](https://github.com/rtCamp/action-deploy-wordpress).
-
 ## Usage
 
 You can use this action after any other action. Here is an example setup of this action:
