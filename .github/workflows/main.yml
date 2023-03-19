@@ -6,14 +6,13 @@ on:
       - main
 
 jobs:
-  notify-slack:
+  slackNotification:
+    name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-      - name: Send message to Slack
-        uses: rtCamp/action-slack-notify@v2.2.0
-        with:
-          status: ${{ job.status }}
-          text: "Build ${{ job.status }} for commit ${{ github.sha }} on branch ${{ github.ref }} by ${{ github.actor }}"
-          fields: repo,message,author,action,workflow,job,commit,ref,eventName,refType,runNumber,runId
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK: '${{ secrets.SLACK_WEBHOOK }}'
+
