@@ -11,7 +11,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.2.0
         with:
           status: ${{ job.status }}
-          text: "A new commit was pushed to the main branch:\n\nCommit message: ${{
+          text: "foooooooooo:\n\nCommit message: ${{
             github.event.head_commit.message }}\nCommit URL: ${{ github.event.head_commit.url }}"
         env:
           SLACK_WEBHOOK: '${{ secrets.SLACK_WEBHOOK }}'
