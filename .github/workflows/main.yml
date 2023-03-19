@@ -1,8 +1,5 @@
 name: Notify Slack on Pull Request Open and Push to Main
 'on':
-  pull_request:
-    types:
-      - opened
   push:
     branches:
       - main
